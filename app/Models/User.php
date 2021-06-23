@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class User
@@ -68,5 +69,30 @@ class User extends Authenticatable
         return $wallet === null
             ? 0
             : $wallet->balance;
+    }
+
+    /**
+     * Возвращает модель роли
+     * @return HasOne
+     */
+    public function role():HasOne
+    {
+        return $this->hasOne(UserRole::class, 'user_id');
+    }
+
+    /**
+     * Проверяет явялется ли пользователь админом или нет
+     * // конечно не особо правильно вешать такое на модель, но ладно, пока что тут оставлю
+     * @return bool
+     * @throws \Exception
+     */
+    public function isAdmin()
+    {
+        $role = $this->role ;
+        if ($role === null) {
+            throw new \Exception('Пользователь не может быть без роли!');
+        }
+
+        return $role->role === UserRole::ROLE_ADMIN;
     }
 }
