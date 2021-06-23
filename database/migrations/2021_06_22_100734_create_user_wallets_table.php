@@ -19,6 +19,7 @@ class CreateUserWalletsTable extends Migration
                 ->comment('Пользоваетль')
                 ->unique()
                 ->constrained('users')
+                ->cascadeOnDelete()
             ;
 
             $table->timestamps();

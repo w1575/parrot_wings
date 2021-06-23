@@ -14,8 +14,24 @@ class CreateUserRolesTable extends Migration
     public function up()
     {
         Schema::create('user_roles', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table
+                ->foreignId('user_id')
+                ->comment('Пользователь')
+                ->constrained('users')
+                ->cascadeOnDelete()
+            ;
+            $table
+                ->tinyInteger('role')
+                ->comment('Роль [0 - пользователь, 1 - админ]')
+                ->default(0)
+            ;
+            $table->unique(
+               'user_id',
+                'idx-user-role'
+            );
+            // исхожу из того, что админ у нас может быть один,
+            // и в целом нет функционала по назначению ролей
+
         });
     }
 
