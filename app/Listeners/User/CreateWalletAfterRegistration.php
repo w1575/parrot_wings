@@ -6,7 +6,6 @@ namespace App\Listeners\User;
 
 use App\Models\User;
 use App\Models\UserWallet;
-use Database\Factories\UserWalletFactory;
 use Illuminate\Auth\Events\Registered;
 
 class CreateWalletAfterRegistration
@@ -21,13 +20,18 @@ class CreateWalletAfterRegistration
         $user = $event->user;
         $id = $user->id;
 
+        try {
+            $wallet = UserWallet::create(
+                [
+                    'user_id' => $id,
+                    'balance' => 500
+                ]
+            );
 
-        $wallet = UserWallet::create(
-            [
-                'user_id' => $id,
-                'balance' => 500
-            ]
-        );
+        } catch (\Exception $e) {
+            $user->delete();
+        }
+
         // думал изначально использовать транзакцию, однако т.к. повесил на ивент, то придется удалять пользователя
         // обычным способом, ибо не гоже пользователю быть без кашелька
         if (! $wallet instanceof UserWallet) {
