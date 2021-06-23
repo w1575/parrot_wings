@@ -40,4 +40,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function wallet():\Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(UserWallet::class, 'user_id', 'id');
+    }
+
+    /**
+     * Возвращает баланс пользователя
+     * @return int
+     */
+    public function balance():int
+    {
+        if ($this->wallet() === null) {
+            return 'Кошелек недоступен';
+        }
+        return rand(0, 255); // TODO: сделать реальный гетер
+    }
 }

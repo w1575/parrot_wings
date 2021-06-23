@@ -18,4 +18,13 @@ class Authenticate extends Middleware
             return route('login');
         }
     }
+
+    /**
+     * Возвращает пользовательский баланс
+     * @return int
+     */
+    public function getUserBalance()
+    {
+        return rand(256);
+    }
 }
