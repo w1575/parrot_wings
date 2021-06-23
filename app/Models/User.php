@@ -4,9 +4,16 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * Class User
+ * @mixin Builder
+ * @package App\Models
+ * @property $id int
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -42,7 +49,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|UserWallet
      */
     public function wallet():\Illuminate\Database\Eloquent\Relations\HasOne
     {
@@ -55,9 +62,11 @@ class User extends Authenticatable
      */
     public function balance():int
     {
-        if ($this->wallet() === null) {
-            return 'Кошелек недоступен';
-        }
-        return rand(0, 255); // TODO: сделать реальный гетер
+        /* @var $wallet UserWallet */
+        $wallet = $this->wallet;
+
+        return $wallet === null
+            ? 0
+            : $wallet->balance;
     }
 }
