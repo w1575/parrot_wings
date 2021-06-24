@@ -10,6 +10,7 @@
     laravelsail/php80-composer:latest \
     composer install --ignore-platform-reqs
    ```
+1.1 alias sail='bash vendor/bin/sail'
 2. `./vendor/bin/sail up -d`
 3. `./vendor/bin/sail exec laravel.test  bash`
 4. `php artisan migrate`

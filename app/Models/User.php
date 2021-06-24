@@ -96,6 +96,6 @@ class User extends Authenticatable
             throw new \Exception('Пользователь не может быть без роли!');
         }
 
-        return $role->role === UserRole::ROLE_ADMIN;
+        return $role->isAdmin();
     }
 }

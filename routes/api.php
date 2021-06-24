@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\Api\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,17 +15,12 @@ use \App\Http\Controllers\Api\UserController;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    $user = $request->user();
+    return new \App\Http\Resources\UserResource($user);
 });
 
-Route::post('/register', [UserController::class, 'register']);
-
-Route::post('/login', [UserController::class, 'login'])->name('login');
+require __DIR__ . '/api/api_auth.php';
 
 
-Route::post('/tokens/create', function (Request $request) {
-    $token = $request->user()->createToken($request->token_name);
 
-    return ['token' => $token->plainTextToken];
-});
 

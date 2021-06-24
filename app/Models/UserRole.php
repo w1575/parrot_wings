@@ -28,4 +28,11 @@ class UserRole extends Model
         'role'
     ];
 
+    /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->role === static::ROLE_ADMIN;
+    }
 }
