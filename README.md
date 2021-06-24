@@ -2,12 +2,12 @@
 
 ### Установка. 
 
-1. ``docker run --rm \
+1. ```docker run --rm \
    -v $(pwd):/opt \
    -w /opt \
    laravelsail/php80-composer:latest \
    composer install 
-   ``
+   ```
 2. `./vendor/bin/sail up -d`
 3. `./vendor/bin/sail exec laravel.test  bash`
 4. `php artisan migrate`
