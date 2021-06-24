@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Class User
@@ -17,7 +18,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.

@@ -21,11 +21,18 @@ use Illuminate\Support\Facades\Route;
 //    return view('dashboard');
 //})->middleware(['auth'])->name('dashboard');
 
+Route::get('/{any}', function () {
+    return view('layouts.vue');
+})->where('any', '.*');
 
-Route::get('/', [\App\Http\Controllers\TransactionController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('dashboard')
-;
+//Route::get('/', [\App\Http\Controllers\TransactionController::class, 'index'])
+//    ->middleware(['auth'])
+//    ->name('dashboard')
+//;
 
-require __DIR__.'/auth.php';
-require  __DIR__.'/test.php';
+//require __DIR__.'/auth.php';
+//require  __DIR__.'/test.php';
+//
+//Auth::routes();
+//
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
