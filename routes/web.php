@@ -17,9 +17,15 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+//Route::get('/', function () {
+//    return view('dashboard');
+//})->middleware(['auth'])->name('dashboard');
+
+
+Route::get('/', [\App\Http\Controllers\TransactionController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard')
+;
 
 require __DIR__.'/auth.php';
 require  __DIR__.'/test.php';
