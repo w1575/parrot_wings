@@ -2,7 +2,8 @@
 
 ### Установка. 
 
-1. ```docker run --rm \
+1. ```
+    docker run --rm \
    -v $(pwd):/opt \
    -w /opt \
    laravelsail/php80-composer:latest \
