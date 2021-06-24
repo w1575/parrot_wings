@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 //    return view('dashboard');
 //})->middleware(['auth'])->name('dashboard');
 
+
 Route::get('/{any}', function () {
     return view('layouts.vue');
 })->where('any', '.*');
