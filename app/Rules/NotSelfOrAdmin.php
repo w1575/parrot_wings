@@ -3,9 +3,10 @@
 namespace App\Rules;
 
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Contracts\Validation\Rule;
 
-class NotSelf implements Rule
+class NotSelfOrAdmin implements Rule
 {
     /**
      * @var User
@@ -31,8 +32,7 @@ class NotSelf implements Rule
      */
     public function passes($attribute, $value)
     {
-        $isValid = $this->userModel->id !== (int) $value;
-        return $isValid;
+        return $this->userModel->id !== (int) $value;
     }
 
     /**

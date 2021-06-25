@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Rules\BalanceGreaterThanSum;
-use App\Rules\NotSelf;
+use App\Rules\NotSelfOrAdmin;
+use App\Rules\RecipientExistAndIsMember;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\Sanctum;
@@ -33,9 +34,10 @@ class TransactionValidator extends FormRequest
             'recipient_id' => [
                 'required',
                 'integer',
-                new NotSelf($user)
+                new NotSelfOrAdmin($user),
+                new RecipientExistAndIsMember(),
             ],
-            'sum' => [
+            'amount' => [
                 'required',
                 'integer',
                 'min:1',
