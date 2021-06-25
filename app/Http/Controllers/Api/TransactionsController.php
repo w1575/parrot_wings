@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TransactionValidator;
+use App\Http\Resources\TransactionCollection;
 use App\Models\Transaction;
 use App\Services\TransactionService;
 use Illuminate\Support\Facades\DB;
@@ -12,9 +13,16 @@ use Illuminate\Support\Facades\DB;
 class TransactionsController extends Controller
 {
 
+    /**
+     * @return TransactionCollection
+     */
     public function index()
     {
+        $transactions = Transaction::query()
+            ->simplePaginate()
+        ;
 
+        return TransactionCollection::make($transactions);
     }
 
     /**
@@ -24,6 +32,7 @@ class TransactionsController extends Controller
     public function create(TransactionValidator $request)
     {
         $request->validate($request->rules());
+
         $recipientId = $request->get('recipient_id');
         $amount = $request->get('amount');
         $user = $request->user();
@@ -31,6 +40,8 @@ class TransactionsController extends Controller
         $transactionService = new TransactionService($user, $recipientId, $amount);
         $transactionService->create();
 
-        return ['current_balance' => $user->balance()];
+        return [
+            'current_balance' => $user->balance()
+        ];
     }
 }

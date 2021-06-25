@@ -14,3 +14,10 @@ Route::post(
     ->middleware('auth:sanctum')
 ;
 
+Route::get(
+    '/transactions',
+    [
+        TransactionsController::class, 'index',
+    ]
+)->middleware('auth:sanctum');
+
