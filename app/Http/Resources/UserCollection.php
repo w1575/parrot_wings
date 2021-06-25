@@ -2,10 +2,18 @@
 
 namespace App\Http\Resources;
 
+use App\Models\User;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class UserCollection extends ResourceCollection
 {
+    /**
+     * @var string
+     */
+    public $collects = UserResource::class;
+
+    public $collection = UserResource::class;
+
     /**
      * Transform the resource collection into an array.
      *
@@ -14,13 +22,6 @@ class UserCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'created_at' => $this->created_at,
-            'balande' => $this->wallet,
-            'is_admin' => $this->role,
-        ];
+        return parent::toArray($request);
     }
 }
