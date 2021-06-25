@@ -16,7 +16,7 @@ use Illuminate\Validation\Rules;
 
 
 
-class UserController extends \App\Http\Controllers\Controller
+class AuthController extends \App\Http\Controllers\Controller
 {
     /**
      * Регистрация нового пользователя

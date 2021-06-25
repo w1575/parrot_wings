@@ -33,5 +33,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     router,
     el: '#app',
-    render: h => h(App)
+    data: {
+        message: 'Привет страница',
+    },
+    render: h => h(App),
+
 });

@@ -35,4 +35,13 @@ class UserRole extends Model
     {
         return $this->role === static::ROLE_ADMIN;
     }
+
+    /**
+     * Связь с таблицей пользователей
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

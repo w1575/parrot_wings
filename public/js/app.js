@@ -1959,6 +1959,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -2032,6 +2036,9 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   router: _router__WEBPACK_IMPORTED_MODULE_0__.default,
   el: '#app',
+  data: {
+    message: 'Привет страница'
+  },
   render: function render(h) {
     return h(_layouts_App_vue__WEBPACK_IMPORTED_MODULE_1__.default);
   }
@@ -37967,22 +37974,30 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container mt-5" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-8" }, [
+        _vm._v(
+          "\n            " +
+            _vm._s(_vm.message) +
+            "\n            Привет\n        "
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container mt-5" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [_vm._v("About")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [_vm._v("About Page")])
-          ])
-        ])
+    return _c("div", { staticClass: "col-md-8" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [_vm._v("About")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [_vm._v("About Page")])
       ])
     ])
   }

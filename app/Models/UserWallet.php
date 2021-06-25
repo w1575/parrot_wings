@@ -29,4 +29,13 @@ class UserWallet extends Model
         'user_id',
     ];
 
+    /**
+     * Связь с таблицей пользователей
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

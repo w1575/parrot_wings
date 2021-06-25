@@ -20,7 +20,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'created_at' => $this->created_at,
             'wallet' => new UserWalletResource($this->wallet),
-            'ia_admin' => new RoleResource($this->role),
+            'role' => new RoleResource($this->role),
         ];
     }
 }

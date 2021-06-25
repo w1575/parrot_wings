@@ -8,6 +8,10 @@
                     <div class="card-body">About Page</div>
                 </div>
             </div>
+            <div class="col-8">
+                {{ message }}
+                Привет
+            </div>
         </div>
     </div>
 </template>
@@ -15,5 +19,8 @@
 <script>
 export default {
 
+
+
 }
+
 </script>

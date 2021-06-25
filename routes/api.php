@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 require __DIR__ . '/api/api_auth.php';
+require __DIR__ . '/api/users.php';
 
 
 

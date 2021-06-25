@@ -1,9 +1,9 @@
 <?php
 
-use \App\Http\Controllers\Api\UserController;
+use \App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::post('/register', [UserController::class, 'register']);
+Route::post('/register', [AuthController::class, 'register']);
 
-Route::post('/login', [UserController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login');

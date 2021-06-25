@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Concerns\Filterable;
+use App\Http\Filters\Filter;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,7 +21,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
 
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Filterable;
 
     /**
      * The attributes that are mass assignable.
@@ -97,5 +99,26 @@ class User extends Authenticatable
         }
 
         return $role->isAdmin();
+    }
+
+    /**
+     * @param Builder $query
+     * @param Filter $filter
+     * @return Builder
+     */
+    public function scopeFilter(Builder $query, Filter $filter):Builder
+    {
+        return $filter->apply($query);
+    }
+
+    /**
+     * Пользователь явялется участником
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUserIsMember($query)
+    {
+        return $query->whereHas('role', function($query) {
+            $query->where('role', '=', UserRole::ROLE_MEMBER);
+        });
     }
 }
