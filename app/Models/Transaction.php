@@ -14,4 +14,15 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     use HasFactory;
+
+    /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'sender_id',
+        'recipient_id',
+        'sender_result_balance',
+        'recipient_result_balance',
+        'amount',
+    ];
 }
