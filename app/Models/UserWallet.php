@@ -28,6 +28,10 @@ class UserWallet extends Model
         'balance',
         'user_id',
     ];
+    /**
+     * @var string
+     */
+    protected $primaryKey = 'user_id';
 
     /**
      * Связь с таблицей пользователей

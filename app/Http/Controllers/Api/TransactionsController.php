@@ -31,6 +31,6 @@ class TransactionsController extends Controller
         $transactionService = new TransactionService($user, $recipientId, $amount);
         $transactionService->create();
 
-        return ['its' => 'just works'];
+        return ['current_balance' => $user->balance()];
     }
 }

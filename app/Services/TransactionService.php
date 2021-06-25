@@ -87,7 +87,7 @@ class TransactionService
             throw new \Exception('Кошелек получателя убежал.');
         }
 
-        $this->recipientWalletModel = $user->wallet();
+        $this->recipientWalletModel = $wallet;
     }
 
     /**
@@ -99,10 +99,10 @@ class TransactionService
         $recipientWallet = $this->recipientWalletModel;
 
         $senderWallet->balance -= $this->amount;
-        $senderWallet->save();
+        $isSenderWalletUpdated = $senderWallet->save();
 
         $recipientWallet->balance += $this->amount;
-        $recipientWallet->save();
+        $isRecipientWalletUpdated = $recipientWallet->save();
 
         $this->senderResultBalance = $senderWallet->balance;
         $this->recipientResultBalance = $recipientWallet->balance;
@@ -140,8 +140,10 @@ class TransactionService
             $this->setBalancesValues();
             $this->createTransactionModel();
         } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
             DB::rollBack();
         }
+
         DB::commit();
 
         return true;
