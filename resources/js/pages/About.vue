@@ -9,7 +9,6 @@
                 </div>
             </div>
             <div class="col-8">
-                {{ message }}
                 Привет
             </div>
         </div>

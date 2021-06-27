@@ -10,6 +10,7 @@ window.Vue = require('vue').default;
 
 import router from './router';
 import App from './layouts/App.vue';
+import store from './store';
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,10 +20,17 @@ import App from './layouts/App.vue';
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
+
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component(
+    'example-component',
+    require('./components/ExampleComponent.vue').default,
+    {
+        props: ['componentMessage']
+    }
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,12 +38,13 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
+var app = new Vue({
     router,
     el: '#app',
-    data: {
-        message: 'Привет страница',
-    },
-    render: h => h(App),
 
+    // methods: {
+    //
+    // },
+    render: h => h(App),
 });
+

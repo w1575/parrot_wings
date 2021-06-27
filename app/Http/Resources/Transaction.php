@@ -22,7 +22,6 @@ class Transaction extends JsonResource
         // однако оставлю пока что так
         // нужно чтобы пользователь не видел баланс другого пользователя
         switch ($user->id) {
-
             case ($this->recipient_id):
                 $balanceAttribute = 'recipient_result_balance';
                 break;

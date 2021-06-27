@@ -14,12 +14,14 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
+        $user = $request->user();
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
             'created_at' => $this->created_at,
-            'wallet' => new UserWalletResource($this->wallet),
+            'wallet' => $this->when($user->isAdmin(), new UserWalletResource($this->wallet)),
             'role' => new RoleResource($this->role),
         ];
     }

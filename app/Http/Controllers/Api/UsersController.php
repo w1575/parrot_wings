@@ -25,9 +25,11 @@ class UsersController extends \App\Http\Controllers\Controller
             'name' => 'min:3'
         ]);
 
+        $currentUserId = $filter->getRequest()->user()->id ?? null;
 
         $users = User::filter($filter)
             ->userIsMember()
+            ->where('id', '!=', $currentUserId)
             ->simplePaginate(5)
         ;
 
