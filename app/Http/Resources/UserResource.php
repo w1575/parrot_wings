@@ -21,7 +21,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'created_at' => $this->created_at,
-            'wallet' => $this->when($user->isAdmin(), new UserWalletResource($this->wallet)),
+            'wallet' => $this->when($user->isAdmin() or $user->id == $this->id, new UserWalletResource($this->wallet)),
             'role' => new RoleResource($this->role),
         ];
     }
