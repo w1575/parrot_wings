@@ -10,9 +10,9 @@
     laravelsail/php80-composer:latest \
     composer install --ignore-platform-reqs
    ```
-2 `alias sail='bash vendor/bin/sail'`
+2. `alias sail='bash vendor/bin/sail'`
 3. `sail up -d`
 4. `sail artisan migrate`
 6. `sail npm run build`
-6 http://localhost:8080/ sudo@localhost.loc/password_0
+7. http://localhost:8080/ sudo@localhost.loc/password_0
 
