@@ -2,7 +2,7 @@
     <div>
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <router-link :to="{ name: 'home' }" class="navbar-brand"
-            >Laravel-Vue SPA</router-link
+            >Parrot Wings</router-link
             >
             <button
                 class="navbar-toggler"
@@ -27,16 +27,39 @@
                         <router-link
                             class="nav-link"
                             data-toggle="collapse"
-                            :to="{ name: 'about' }"
+                            :to="{ name: 'transactions' }"
                         >
-                            About
+                            Transactions
                         </router-link>
                     </li>
                 </ul>
             </div>
+            <div class="navbar-nav ml-sm-auto">
+                <div class="nav-item">
+                    <span class="nav-link">
+                        Balance: 500
+                    </span>
+                </div>
+                <div class="nav-item">
+
+                </div>
+                <div class="nav-item">
+                    <span class="nav-link">
+                        Ivanov Ivan
+                    </span>
+                </div>
+                <div class="nav-item">
+                    <router-link
+                        class="nav-link"
+                        data-toggle="collapse"
+                        :to="{ name: 'logout' }"
+                    >
+                        Logout
+                    </router-link>
+                </div>
+            </div>
         </nav>
         <div class="container">
-
             <router-view></router-view>
         </div>
     </div>
@@ -50,5 +73,6 @@ export default {
             $("#navbarCollapse").collapse("hide");
         },
     },
+
 };
 </script>

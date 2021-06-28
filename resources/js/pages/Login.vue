@@ -4,13 +4,13 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Login</div>
-                    <div>
+                    <div class="card-body">
                         <form class="login" @submit.prevent="login">
                             <h1>Sign in</h1>
-                            <label>User name</label>
-                            <input required v-model="username" type="text" placeholder="Snoopy"/>
+                            <label>Email</label>
+                            <input required  type="text" v-model="loginForm.email" placeholder="Snoopy"/>
                             <label>Password</label>
-                            <input required v-model="password" type="password" placeholder="Password"/>
+                            <input required  type="password" v-model="loginForm.password" placeholder="Password"/>
                             <hr/>
                             <button type="submit">Login</button>
                         </form>
@@ -22,18 +22,43 @@
 </template>
 
 <script>
+const loginForm = {
+    email: '',
+    password: '',
+};
+
+console.log(app)
+
 export default {
-    name: "Login"
+    data() {
+        return {loginForm: loginForm}
+    },
+    name: "Login",
+    methods: {
+        login: function () {
+            axios.post(
+                "/api/login",
+                this.loginForm,
+                {
+                    'Content-Type': 'application/json',
+                }
+            )
+                .then((response) => {
+                    let token = response.data.token;
+                    localStorage.setItem('token', token)
+                    this.$router.push('/')
+                    console.info(this.userModule)
+
+                })
+                .catch(function (error) {
+                    // console.log(error);
+                })
+        }
+    }
 }
 
-// methods: {
-//     login: function () {
-//         const { username, password } = this
-//         this.$store.dispatch(AUTH_REQUEST, { username, password }).then(() => {
-//             this.$router.push('/')
-//         })
-//     }
-// }
+
+
 
 </script>
 

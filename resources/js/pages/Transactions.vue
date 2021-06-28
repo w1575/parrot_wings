@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="col-8">
-                Привет
+                Привет {{ componentMessage }}
             </div>
         </div>
     </div>
@@ -18,6 +18,11 @@
 <script>
 export default {
 
+    data() {
+        return {
+            componentMessage: 'Страница транзакций'
+        }
+    }
 
 
 }

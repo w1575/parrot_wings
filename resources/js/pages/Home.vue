@@ -13,7 +13,7 @@
                         </p>
                     </div>
                     <div>
-                        <example-component></example-component>
+
                     </div>
                 </div>
             </div>
@@ -23,17 +23,10 @@
 
 <script>
 
-function randomInteger(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 export default {
-    data: function() {
-        return {
-            componentMessage: 'Переданный текст в компонент',
-            line_message: 'Строка номер ',
-            count_lines: randomInteger(1, 256),
-        }
+    data() {
+        return {componentMessage : 'Давай блять'};
     }
 }
 </script>
