@@ -40,6 +40,8 @@ Vue.component(
 
 require('./store/subscriber')
 
+Vue.use(require('vue-moment'));
+
 store.dispatch('auth/attempt', localStorage.getItem('token')).then(() => {
     const app = new Vue({
         router,

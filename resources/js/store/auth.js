@@ -17,6 +17,10 @@ export default{
             return state.user;
         },
 
+        token (state) {
+            return state.token;
+        },
+
         isAdmin(state) {
           return state.user.role.is_admin ?? false;
         }
