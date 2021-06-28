@@ -5,6 +5,7 @@ import Home from './pages/Home.vue';
 import Transactions from './pages/Transactions.vue';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
+import Register from './pages/Register';
 // import userModeule from "./store/modules/user";
 import store from "./store";
 
@@ -60,10 +61,10 @@ const router = new VueRouter({
             beforeEnter: userNotLoggedIn
         },
         {
-            path: '/logout',
-            name: 'logout',
-            // component: Login,
-            // beforeEnter: logout
+            path: '/register',
+            name: 'register',
+            component: Register,
+            beforeEnter: userNotLoggedIn
         },
         {
             path: '/admin',

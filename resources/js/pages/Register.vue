@@ -6,13 +6,17 @@
                     <div class="card-header">Login</div>
                     <div class="card-body">
                         <form class="login" @submit.prevent="submit">
+                            <h1>Sign in</h1>
                             <label>Email</label>
-                            <input class="input-group" required  type="text" v-model="form.email" placeholder="Snoopy"/>
+                            <input class="input-group" required  type="text" v-model="form.email" placeholder="For example test@gmail.com"/>
+                            <label>Name </label>
+                            <input class="input-group" required  type="text" v-model="form.name" placeholder="For example Petrov Petr"/>
                             <label>Password</label>
                             <input class="input-group" required  type="password" v-model="form.password" placeholder="Password"/>
+                            <label>Password confirmation</label>
+                            <input class="input-group" required  type="password" v-model="form.password_confirmation" placeholder="Password confirmation"/>
                             <hr/>
                             <button class="btn btn-dark" type="submit">Login</button>
-                            <a class="link-dark" href="/register">Sing Up</a>
                         </form>
                     </div>
                 </div>
@@ -30,20 +34,22 @@ export default {
     data() {
         return {
             form: {
+                name: '',
                 email: '',
                 password: '',
+                password_confirmation: '',
             }
         }
     },
     methods: {
         ...mapActions({
-            signIn: 'auth/signIn'
+            signUp: 'auth/signUp'
         }),
 
         submit() {
-            this.signIn(this.form).then(() => {
+            this.signUp(this.form).then(() => {
                 this.$router.replace({
-                    name: 'Home'
+                    name: 'home'
                 })
             })
         }

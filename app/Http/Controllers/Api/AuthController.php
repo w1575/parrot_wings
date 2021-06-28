@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Models\User;
+use Facade\FlareClient\Http\Exceptions\BadResponse;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -12,16 +13,15 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-
-
+use Symfony\Component\CssSelector\Exception\InternalErrorException;
 
 
 class AuthController extends \App\Http\Controllers\Controller
 {
-    /**
-     * Регистрация нового пользователя
+    /***
      * @param Request $request
-     * @return User|\Illuminate\Database\Eloquent\Model
+     * @return array
+     * @throws BadResponse
      */
     public function register(Request $request)
     {
@@ -39,7 +39,15 @@ class AuthController extends \App\Http\Controllers\Controller
 
         event(new Registered($user));
 
-        return $user;
+        $token = $user->createToken('authToken');
+
+        if (!$user instanceof User) {
+            throw new BadResponse('Cannot register user');
+        }
+
+        return ['token' => $token->plainTextToken];
+
+
     }
 
     /**

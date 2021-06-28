@@ -38,6 +38,11 @@ export default{
             return dispatch('attempt', response.data.token)
         },
 
+        async signUp({ dispatch }, credentials) {
+            let response = await axios.post('/api/register', credentials)
+            return dispatch('attempt', response.data.token)
+        },
+
         async attempt ( { commit, state }, token) {
 
             if (token) {
