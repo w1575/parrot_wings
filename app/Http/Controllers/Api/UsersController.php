@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Filters\UserFilter;
 use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\Request;
@@ -34,5 +35,25 @@ class UsersController extends \App\Http\Controllers\Controller
         ;
 
         return UserCollection::make($users);
+    }
+
+    /**
+     * Просмотр информации по пользователю
+     * @param Request $request
+     */
+    public function view(int $id)
+    {
+
+        $user = User::query()
+            ->where('id', '=', $id)
+            ->first()
+        ;
+
+        if (!$user instanceof  User) {
+            return [];
+        }
+
+        return UserResource::make($user);
+
     }
 }

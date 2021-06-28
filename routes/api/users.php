@@ -11,4 +11,12 @@ Route::get(
     ]
 )->middleware('auth:sanctum');
 
+Route::get(
+    '/users/{id}',
+    [
+        \App\Http\Controllers\Api\UsersController::class,
+        'view'
+    ]
+)->middleware('auth:sanctum');
+
 

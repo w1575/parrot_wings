@@ -2555,11 +2555,55 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   mounted: function mounted() {
-    var _this$$route$query$am;
+    var _this = this;
 
-    // this.form.recipient.value = this.$route.query.recipientId ?? null;
-    // this.form.recipient.text = this.$route.query.recipientId ?? '';
-    this.form.amount = (_this$$route$query$am = this.$route.query.amount) !== null && _this$$route$query$am !== void 0 ? _this$$route$query$am : null;
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var _this$$route$query$am, _this$$route$query$re;
+
+      var recipientId, thisApp, user;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _this.form.amount = (_this$$route$query$am = _this.$route.query.amount) !== null && _this$$route$query$am !== void 0 ? _this$$route$query$am : null;
+              recipientId = (_this$$route$query$re = _this.$route.query.recipientId) !== null && _this$$route$query$re !== void 0 ? _this$$route$query$re : null;
+
+              if (!recipientId) {
+                _context2.next = 12;
+                break;
+              }
+
+              _context2.prev = 3;
+              thisApp = _this;
+              _context2.next = 7;
+              return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/api/users/' + recipientId).then(function (response) {
+                var userData = {
+                  id: response.data.data.id,
+                  name: response.data.data.name
+                };
+                console.log(userData);
+
+                _this.usersOptions.push(userData);
+
+                _this.form.recipient_id = userData.id;
+              });
+
+            case 7:
+              user = _context2.sent;
+              _context2.next = 12;
+              break;
+
+            case 10:
+              _context2.prev = 10;
+              _context2.t0 = _context2["catch"](3);
+
+            case 12:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[3, 10]]);
+    }))();
   }
 });
 

@@ -156,10 +156,31 @@ export default {
         }
     },
 
-    mounted() {
-        // this.form.recipient.value = this.$route.query.recipientId ?? null;
-        // this.form.recipient.text = this.$route.query.recipientId ?? '';
+    async mounted() {
+
         this.form.amount = this.$route.query.amount ?? null;
+        let recipientId = this.$route.query.recipientId ?? null;
+
+        if (recipientId) {
+            try {
+                var thisApp = this;
+                let user = await axios.get('/api/users/' + recipientId).then((response) =>{
+                    let userData = {
+                        id: response.data.data.id,
+                        name: response.data.data.name
+                    };
+                    console.log(userData)
+                    this.usersOptions.push(userData);
+                    this.form.recipient_id = userData.id;
+                })
+
+            } catch (e) {
+
+            }
+
+
+        }
+
     }
 
 
