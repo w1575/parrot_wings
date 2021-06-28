@@ -4,27 +4,36 @@ import VueRouter from 'vue-router';
 import Home from './pages/Home.vue';
 import Transactions from './pages/Transactions.vue';
 import Login from './pages/Login';
-import userModeule from "./store/modules/user";
-// import store from "../store";
+import Admin from './pages/Admin';
+// import userModeule from "./store/modules/user";
+import store from "./store";
 
 Vue.use(VueRouter);
 
-const ifNotAuth = (to, from, next) => {
-    console.log('Check if user logged in')
-    next()
-}
-
-const ifAuth = (to, from, next) => {
-    console.log(userModeule.getters.isAuthenticated)
-    if (userModeule.getters.isAuthenticated === '') {
-        next('/login');
+const userLoggedIn = (to, form, next) => {
+    console.log('if user logged in')
+    if (!store.getters['auth/authenticated']) {
+        return next({
+            'name': 'login'
+        })
     }
-    next()
+
+    next();
 }
 
-const logout = (to, from, next) => {
-    localStorage.clear()
-    next('/login')
+const userNotLoggedIn = (to, form, next) => {
+    console.log('if user logged in')
+    if (store.getters['auth/authenticated']) {
+        return next({
+            'name': 'home'
+        })
+    }
+    next();
+}
+
+
+const isAdmin = (to, from, next) => {
+    // return this.$store.getters["auth/isAdmin"];
 }
 
 
@@ -36,26 +45,32 @@ const router = new VueRouter({
             path: '/',
             name: 'home',
             component: Home,
-            beforeEnter: ifAuth
+            beforeEnter: userLoggedIn
         },
         {
             path: '/transactions',
             name: 'transactions',
             component: Transactions,
-            beforeEnter: ifAuth
+            beforeEnter: userLoggedIn
         },
         {
             path: '/login',
             name: 'login',
             component: Login,
-            beforeEnter: ifNotAuth
+            beforeEnter: userNotLoggedIn
         },
         {
             path: '/logout',
             name: 'logout',
             // component: Login,
-            beforeEnter: logout
+            // beforeEnter: logout
         },
+        {
+            path: '/admin',
+            name: 'admin',
+            component: Admin,
+            beforeEnter: isAdmin,
+        }
     ]
 });
 

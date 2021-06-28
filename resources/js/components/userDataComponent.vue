@@ -1,23 +1,39 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component. {{ componentMessage }}
-                    </div>
-                </div>
-            </div>
+    <div class="navbar-nav ml-sm-auto" v-if="authenticated">
+        <div class="nav-item">
+                    <span class="nav-link" v-model="user.wallet.balance"> Balance: {{ user.wallet.balance }} </span>
+        </div>
+        <div class="nav-item">
+                    <span class="nav-link" v-model="$store.state.userName"> {{ user.name }} </span>
+        </div>
+        <div class="nav-item">
+            <a href="#" class="nav-link" @click.prevent="signOut">Logout</a>
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Я компонент!')
-        },
-    }
+import { mapGetters, mapActions } from 'vuex';
+export default {
+    computed: {
+        ...mapGetters({
+            authenticated: 'auth/authenticated',
+            user: 'auth/user',
+        })
+    },
+
+    methods: {
+        ...mapActions({
+            signOutAction: 'auth/signOut',
+        }),
+
+        signOut () {
+            this.signOutAction().then(() => {
+                this.$router.replace({
+                    'name': 'login'
+                })
+            })
+        }
+    },
+}
 </script>

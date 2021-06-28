@@ -26,7 +26,7 @@
 
 export default {
     data() {
-        return {componentMessage : 'Давай блять'};
+        return {componentMessage : 'Тест'};
     }
 }
 </script>

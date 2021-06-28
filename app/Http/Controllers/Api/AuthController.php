@@ -68,4 +68,16 @@ class AuthController extends \App\Http\Controllers\Controller
 
         return ['token' => $token->plainTextToken];
     }
+
+    /**
+     * @param Request $request
+     * @return null
+     */
+    public function logout(Request $request)
+    {
+        $user = $request->user();
+        $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
+
+        return null;
+    }
 }

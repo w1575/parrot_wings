@@ -11,9 +11,8 @@ window.Vue = require('vue').default;
 import router from './router';
 import App from './layouts/App.vue';
 import store from './store';
-import Vuex from "vuex";
 
-Vue.use(Vuex)
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -38,15 +37,22 @@ Vue.component(
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    router,
-    el: '#app',
-    store,
-    // methods: {
-    //
-    // },
-    render: h => h(App),
-});
+
+require('./store/subscriber')
+
+store.dispatch('auth/attempt', localStorage.getItem('token')).then(() => {
+    const app = new Vue({
+        router,
+        el: '#app',
+        store,
+        // methods: {
+        //
+        // },
+        render: h => h(App),
+    });
+})
+
+
 
 
 
