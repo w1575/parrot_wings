@@ -33,6 +33,16 @@
                                     Transactions
                                 </router-link>
                             </li>
+
+                            <li class="nav-item">
+                                <router-link
+                                    class="btn btn-success"
+                                    data-toggle="collapse"
+                                    :to="{ name: 'transaction' }"
+                                >
+                                    Transactions
+                                </router-link>
+                            </li>
                         </ul>
                 </div>
             </template>

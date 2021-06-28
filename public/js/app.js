@@ -1970,6 +1970,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
@@ -2595,6 +2605,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2688,7 +2711,9 @@ Vue.component('userDataComponent', __webpack_require__(/*! ./components/userData
 
 __webpack_require__(/*! ./store/subscriber */ "./resources/js/store/subscriber.js");
 
-Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vue-moment.js"));
+Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vue-moment.js")); // import { BootstrapVueIcons } from 'bootstrap-vue';
+// Vue.use(require('bootstrap-vue'))
+
 _store__WEBPACK_IMPORTED_MODULE_2__.default.dispatch('auth/attempt', localStorage.getItem('token')).then(function () {
   var app = new Vue({
     router: _router__WEBPACK_IMPORTED_MODULE_0__.default,
@@ -2840,7 +2865,13 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_8__.default({
     name: 'transaction',
     component: _pages_Transaction__WEBPACK_IMPORTED_MODULE_4__.default,
     beforeEnter: userLoggedIn
-  }]
+  } // {
+  //     path: '/transaction/:recipientId/:amount',
+  //     name: 'repeatTransaction',
+  //     component: Transaction,
+  //     beforeEnter: userLoggedIn,
+  // }
+  ]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
 
@@ -39869,8 +39900,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.authenticated
     ? _c("div", { staticClass: "navbar-nav ml-sm-auto" }, [
-        _vm._m(0),
-        _vm._v(" "),
         _c("div", { staticClass: "nav-item" }, [
           _c(
             "span",
@@ -39924,20 +39953,7 @@ var render = function() {
       ])
     : _vm._e()
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "nav-item" }, [
-      _c(
-        "a",
-        { staticClass: "btn btn-success", attrs: { href: "/transaction" } },
-        [_vm._v("\n            New Transaction\n        ")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -40019,6 +40035,29 @@ var render = function() {
                             attrs: {
                               "data-toggle": "collapse",
                               to: { name: "transactions" }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Transactions\n                            "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "btn btn-success",
+                            attrs: {
+                              "data-toggle": "collapse",
+                              to: { name: "transaction" }
                             }
                           },
                           [
@@ -40779,7 +40818,35 @@ var render = function() {
                           _c("span", [_vm._v(_vm._s(transaction.amount))])
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(transaction.result_balance))])
+                        _c("td", [_vm._v(_vm._s(transaction.result_balance))]),
+                        _vm._v(" "),
+                        _c(
+                          "th",
+                          [
+                            _vm.user.id == transaction.sender.id
+                              ? _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "btn btn-success",
+                                    attrs: {
+                                      "data-toggle": "collapse",
+                                      to:
+                                        "/transaction?recipientId=" +
+                                        transaction.recipient.id +
+                                        "&amount=" +
+                                        transaction.amount
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                    Repeat\n                                "
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ],
+                          1
+                        )
                       ])
                     })
                   ],
@@ -40826,7 +40893,9 @@ var staticRenderFns = [
         _vm._v(
           "\n                                Balance\n                            "
         )
-      ])
+      ]),
+      _vm._v(" "),
+      _c("th")
     ])
   }
 ]

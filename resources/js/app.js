@@ -41,6 +41,8 @@ Vue.component(
 require('./store/subscriber')
 
 Vue.use(require('vue-moment'));
+// import { BootstrapVueIcons } from 'bootstrap-vue';
+// Vue.use(require('bootstrap-vue'))
 
 store.dispatch('auth/attempt', localStorage.getItem('token')).then(() => {
     const app = new Vue({

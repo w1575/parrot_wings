@@ -26,6 +26,7 @@
                                 <th>
                                     Balance
                                 </th>
+                                <th></th>
                             </tr>
                             <tr v-for="transaction in transactions">
                                 <td>{{ transaction.created_at | moment("D.M.Y")}}</td>
@@ -37,6 +38,18 @@
                                     <span>{{ transaction.amount }}</span>
                                 </td>
                                 <td>{{ transaction.result_balance }}</td>
+                                <th>
+                                    <router-link
+                                        v-if="user.id == transaction.sender.id"
+                                        class="btn btn-success"
+                                        data-toggle="collapse"
+                                        :to="'/transaction?recipientId=' + transaction.recipient.id + '&amount=' + transaction.amount"
+
+
+                                    >
+                                        Repeat
+                                    </router-link>
+                                </th>
                             </tr>
                         </table>
                     </div>

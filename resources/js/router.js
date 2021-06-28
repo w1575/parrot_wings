@@ -77,7 +77,13 @@ const router = new VueRouter({
             name: 'transaction',
             component: Transaction,
             beforeEnter: userLoggedIn,
-        }
+        },
+        // {
+        //     path: '/transaction/:recipientId/:amount',
+        //     name: 'repeatTransaction',
+        //     component: Transaction,
+        //     beforeEnter: userLoggedIn,
+        // }
     ]
 });
 
