@@ -24,6 +24,7 @@ class TransactionsController extends Controller
         $transactions = Transaction::query()
             ->where('recipient_id', '=', $user->id)
             ->orWhere('sender_id', '=', $user->id)
+            ->orderBy('id', 'DESC')
             ->simplePaginate()
         ;
 

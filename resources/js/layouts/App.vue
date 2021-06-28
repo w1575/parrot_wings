@@ -12,30 +12,29 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <template v-if="authenticated">
-            <div id="navbarCollapse" class="collapse navbar-collapse">
+                <div id="navbarCollapse" class="collapse navbar-collapse">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <router-link
+                                    class="nav-link"
+                                    data-toggle="collapse"
+                                    :to="{ name: 'home' }"
+                                >
+                                    Home
+                                </router-link>
+                            </li>
 
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <router-link
-                                class="nav-link"
-                                data-toggle="collapse"
-                                :to="{ name: 'home' }"
-                            >
-                                Home
-                            </router-link>
-                        </li>
-
-                        <li class="nav-item">
-                            <router-link
-                                class="nav-link"
-                                data-toggle="collapse"
-                                :to="{ name: 'transactions' }"
-                            >
-                                Transactions
-                            </router-link>
-                        </li>
-                    </ul>
-            </div>
+                            <li class="nav-item">
+                                <router-link
+                                    class="nav-link"
+                                    data-toggle="collapse"
+                                    :to="{ name: 'transactions' }"
+                                >
+                                    Transactions
+                                </router-link>
+                            </li>
+                        </ul>
+                </div>
             </template>
             <userDataComponent></userDataComponent>
         </nav>

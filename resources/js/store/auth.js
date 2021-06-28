@@ -33,6 +33,10 @@ export default{
 
         SET_USER (state, data) {
             state.user = data
+        },
+
+        SET_BALANCE (state, data) {
+            state.user.balance = data;
         }
     },
 

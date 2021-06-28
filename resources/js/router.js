@@ -5,8 +5,8 @@ import Home from './pages/Home.vue';
 import Transactions from './pages/Transactions.vue';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
+import Transaction from './pages/Transaction';
 import Register from './pages/Register';
-// import userModeule from "./store/modules/user";
 import store from "./store";
 
 Vue.use(VueRouter);
@@ -71,6 +71,12 @@ const router = new VueRouter({
             name: 'admin',
             component: Admin,
             beforeEnter: isAdmin,
+        },
+        {
+            path: '/transaction',
+            name: 'transaction',
+            component: Transaction,
+            beforeEnter: userLoggedIn,
         }
     ]
 });

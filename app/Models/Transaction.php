@@ -25,4 +25,22 @@ class Transaction extends Model
         'recipient_result_balance',
         'amount',
     ];
+
+    /**
+     * Пользователь, который получил деньги
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function recipient()
+    {
+        return $this->hasOne(User::class, 'id', 'recipient_id');
+    }
+
+    /**
+     * Пользователь, отправил отправил деньги
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function sender()
+    {
+        return $this->hasOne(User::class, 'id', 'sender_id');
+    }
 }

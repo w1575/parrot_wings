@@ -1,6 +1,12 @@
 <template>
     <div class="navbar-nav ml-sm-auto" v-if="authenticated">
         <div class="nav-item">
+            <a href="/transaction" class="btn btn-success">
+                New Transaction
+            </a>
+        </div>
+
+        <div class="nav-item">
                     <span class="nav-link" v-model="user.wallet.balance"> Balance: {{ user.wallet.balance }} </span>
         </div>
         <div class="nav-item">

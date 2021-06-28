@@ -1,7 +1,7 @@
 <template>
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Home</div>
 
@@ -32,9 +32,13 @@
                             </tr>
                             <tr v-for="transaction in transactions">
                                 <td>{{ transaction.created_at | moment("D.M.Y")}}</td>
-                                <td>{{ transaction.sender_id }}</td>
-                                <td>{{ transaction.recipient_id }}</td>
-                                <td>{{ transaction.amount }}</td>
+                                <td>{{ transaction.sender.name }}</td>
+                                <td>{{ transaction.recipient.name }}</td>
+                                <td>
+                                    <span v-if="user.id == transaction.sender.id">-</span>
+                                    <span v-if="user.id == transaction.recipient.id">+</span>
+                                    <span>{{ transaction.amount }}</span>
+                                </td>
                                 <td>{{ transaction.result_balance }}</td>
                             </tr>
                         </table>

@@ -34,8 +34,14 @@ class Transaction extends JsonResource
         }
         return [
             'created_at' => $this->created_at,
-            'sender_id' => $this->sender_id,
-            'recipient_id' => $this->recipient_id,
+            'sender' => [
+                'id' => $this->sender->id,
+                'name' => $this->sender->name
+            ],
+            'recipient' => [
+                'id' => $this->recipient->id,
+                'name' => $this->recipient->name
+            ],
             'amount' => $this->amount,
             'result_balance' => $this->{$balanceAttribute},
         ];
