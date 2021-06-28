@@ -19,14 +19,16 @@
                             </div>
                             <div >
                                 <label class="form-label">Recipient</label>
-                                <input
-                                    id="recipient"
-                                    v-model="form.recipient_id"
-                                    type="text"
-                                    name="recipient_id"
-                                    class="form-control"
-                                >
+
+                                <v-select label="name"
+                                          v-model="form.recipient_id"
+                                          :options="usersOptions"
+                                          :reduce="item => item.id"
+                                          @search="fetchOptions" >
+                                </v-select>
+
                                 <br>
+
                             </div>
                             <div class="">
                                 <button
@@ -74,11 +76,12 @@ export default {
                 amount: null,
             },
             errors: [],
+            usersOptions: [],
         }
     },
 
     methods: {
-         submitForm: async function(e) {
+        submitForm: async function(e) {
             e.preventDefault();
 
             console.log(this.$store)
@@ -121,12 +124,42 @@ export default {
             } catch (e) {
                 console.log(e)
             }
+        },
+        fetchOptions: function(search, loading){
+
+            var el = this;
+            let token = this.user.token;
+            if (search.length < 3) {
+                return true;
+            }
+            // AJAX request
+            axios.get('/api/users', {
+                params: {
+                    name: search,
+                },
+                // 'Authorization': 'Bearer ' + token,
+
+            })
+            .then(function (response) {
+                let data = [];
+                let responseData = response.data.data;
+                responseData.forEach(function(currentValue, index, array) {
+                    data.push({id: currentValue.id, name: currentValue.name})
+                })
+
+                el.usersOptions = data;
+
+            });
+        },
+        selectedOption: function (value){
+            // console.log("value : " + value.id);
         }
     },
 
     mounted() {
-
-        // console.log(request);
+        // this.form.recipient.value = this.$route.query.recipientId ?? null;
+        // this.form.recipient.text = this.$route.query.recipientId ?? '';
+        this.form.amount = this.$route.query.amount ?? null;
     }
 
 
@@ -135,3 +168,41 @@ export default {
 }
 
 </script>
+
+<style>
+img {
+    height: auto;
+    max-width: 2.5rem;
+    margin-right: 1rem;
+}
+
+.d-center {
+    display: flex;
+    align-items: center;
+}
+
+.selected img {
+    width: auto;
+    max-height: 23px;
+    margin-right: 0.5rem;
+}
+
+.v-select .dropdown li {
+    border-bottom: 1px solid rgba(112, 128, 144, 0.1);
+}
+
+.v-select .dropdown li:last-child {
+    border-bottom: none;
+}
+
+.v-select .dropdown li a {
+    padding: 10px 20px;
+    width: 100%;
+    font-size: 1.25em;
+    color: #3c3c3c;
+}
+
+.v-select .dropdown-menu .active > a {
+    color: #fff;
+}
+</style>
